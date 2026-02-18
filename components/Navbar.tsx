@@ -10,8 +10,8 @@ const Navbar = () => {
   const [open, setOpen] = useState(false);
   return (
     <>
-      <div className="md:hidden flex items-center justify-between bg-gray-100 p-4 border-b text-black w-dvw">
-        <h1 className="text-2xl font-semibold">{state}</h1>
+      <div className="md:hidden flex items-center justify-between bg-gray-100 p-4 border-b ">
+        <h1 className="text-2xl font-semibold text-black ">{state}</h1>
 
         <button onClick={() => setOpen(!open)} className="flex flex-col gap-1">
           <span className="w-6 h-0.5 bg-black"></span>
@@ -68,7 +68,7 @@ const Navbar = () => {
           </div>
         </div>
       )}
-      <nav className="hidden navbar md:w-2/10 md:h-dvh p-2 bg-gray-100 md:flex md:flex-col ">
+      <nav className="hidden navbar md:w-2/10 md:h-dvh p-2 bg-gray-100 md:flex md:flex-col border-2">
         <div className="p-2">
             <h1 className="text-2xl font-semibold text-black">{state}</h1>
         </div>
