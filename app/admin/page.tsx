@@ -1,4 +1,4 @@
-import AdminViews from "@/views/AdminViews";
+import AdminView from "@/views/AdminView";
 export default function Home() {
-  return <AdminViews />;
+  return <AdminView />;
 }

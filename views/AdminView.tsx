@@ -7,7 +7,7 @@ import ConcertCreate from "@/components/ConcertCreate";
 
 type subview = "OVERVIEW" | "CREATE";
 
-const AdminViews = () => {
+const AdminView = () => {
   const [view, setview] = useState<subview>("OVERVIEW");
   return (
     <div className="text-black flex flex-col min-h-full">
@@ -38,4 +38,4 @@ const AdminViews = () => {
   );
 };
 
-export default AdminViews;
+export default AdminView;

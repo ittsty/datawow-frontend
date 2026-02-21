@@ -1,11 +1,12 @@
 "use client";
 
 import { useState } from "react";
+import { concertService } from "@/services/concert.service";
 
-const ConcertCreate = () => {
+const ConcertCreate = ({ onSuccess }: { onSuccess?: () => void }) => {
   const [form, setForm] = useState({
     name: "",
-    totalSeat: 0,
+    totalSeats: 0,
     description: "",
   });
 
@@ -18,10 +19,32 @@ const ConcertCreate = () => {
     });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit =async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("Create concert:", form);
+    try {
+      setLoading(true);
+
+      await concertService.createConcert(form);
+
+      alert("Created successfully");
+
+      // reset form
+      setForm({
+        name: "",
+        totalSeats: 0,
+        description: "",
+      });
+
+      onSuccess?.();
+    } catch (error) {
+      console.error(error);
+      alert("Create failed");
+    } finally {
+      setLoading(false);
+    }
   };
+
+  const [loading, setLoading] = useState(false);
   return (
     <div className="bg-white p-4 rounded shadow-sm gap-4">
       <h2 className="text-blue-400 font-semibold text-3xl">Create</h2>
@@ -42,8 +65,8 @@ const ConcertCreate = () => {
             <label className="block text-lg mb-1">Total of seat</label>
             <input
               type="number"
-              name="totalSeat"
-              value={form.totalSeat}
+              name="totalSeats"
+              value={form.totalSeats}
               onChange={handleChange}
               className="p-2 w-full border text-sm border-gray-300 rounded-xl bg-gray-50 text-gray-800 outline-none transition-all duration-200 focus:bg-white focus:border-blue-500 focus:shadow-sm"
               required
