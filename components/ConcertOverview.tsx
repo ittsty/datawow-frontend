@@ -1,4 +1,3 @@
-import { Concerts } from "@/mock-db/concert";
 import { concertService } from "@/services/concert.service";
 import { useEffect, useState } from "react";
 
