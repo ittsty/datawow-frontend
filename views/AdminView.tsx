@@ -1,20 +1,35 @@
 "use client";
 
 import StatCard from "@/components/StatCard";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ConcertOverview from "../components/ConcertOverview";
 import ConcertCreate from "@/components/ConcertCreate";
+import { ReservationService } from "@/services/reservation.service";
 
 type subview = "OVERVIEW" | "CREATE";
 
 const AdminView = () => {
   const [view, setview] = useState<subview>("OVERVIEW");
+  const [stats, setStats] = useState({
+    totalSeats: 0,
+    reserveCount: 0,
+    cancelCount: 0,
+  });
+
+  useEffect(() => {
+    fetchStats();
+  }, []);
+
+  async function fetchStats() {
+    const data = await ReservationService.getStats();
+    setStats(data);
+  }
   return (
     <div className="text-black flex flex-col min-h-full">
       <div className="grid grid-cols-3 gap-4 mb-6 w-full">
-        <StatCard title="Total of seats" value="500" color="bg-blue-400" />
-        <StatCard title="Reserve" value="120" color="bg-green-400" />
-        <StatCard title="Cancel" value="12" color="bg-red-400" />
+        <StatCard title="Total of seats" value={stats.totalSeats} color="bg-blue-400" />
+        <StatCard title="Reserve" value={stats.reserveCount} color="bg-green-400" />
+        <StatCard title="Cancel" value={stats.cancelCount} color="bg-red-400" />
       </div>
       <div className="flex gap-2 mb-4 w-full">
         <button

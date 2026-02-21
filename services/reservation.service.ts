@@ -53,4 +53,8 @@ export const ReservationService = {
       throw new Error("Failed to Connect API");
     }
   },
+  async getStats() {
+    const res = await fetch(`${API}/reservation/stats`);
+    return res.json();
+  },
 };
